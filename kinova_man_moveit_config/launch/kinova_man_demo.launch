@@ -1,0 +1,60 @@
+<launch>
+  <!-- <param name="robot_type" value="j2s7s300" /> -->
+  <param name="/pick_place_demo/arm/solve_type" value="Manipulation2" />
+  <param name="/pick_place_demo/arm/kinematics_solver_timeout" value="0.05" />
+
+  <!-- By default, we launch an RViz instance -->
+  <arg name="gui" default="true"/>
+
+  <!-- By default, we do not start a database (it can be large) -->
+  <arg name="db" default="false" />
+  <!-- Allow user to specify database location -->
+  <arg name="db_path" default="$(find kinova_man_moveit_config)/default_warehouse_mongo_db" />
+
+  <!-- By default, we are not in debug mode -->
+  <arg name="debug" default="false" />
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find kinova_man_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <!-- If needed, broadcast static tf for robot root -->
+  
+  <node name="left_arm_pid_joint_trajectory_action_server" pkg="kinova_man_bringup" type="pid_traj_action_server.py" output="screen" respawn="false">
+    <param name="driver_name" value="left_arm_driver" />
+    <param name="controller_name" value="left_arm_controller" />
+  </node>
+  <node name="left_arm_gripper_command_action_server" pkg="kinova_driver" type="gripper_command_action_server" output="screen" respawn="false" args="left_arm"/>
+
+  <node name="right_arm_pid_joint_trajectory_action_server" pkg="kinova_man_bringup" type="pid_traj_action_server.py" output="screen" respawn="false">
+    <param name="driver_name" value="right_arm_driver" />
+    <param name="controller_name" value="right_arm_controller" />
+  </node>
+  <node name="right_arm_gripper_command_action_server" pkg="kinova_driver" type="gripper_command_action_server" output="screen" respawn="false" args="right_arm"/>
+
+  <!-- Run the main MoveIt executable without trajectory execution 
+  (we do not have controllers configured by default) -->
+  <include file="$(find kinova_man_moveit_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <!-- <arg name="controller_manager" value="j2s7s300"/> -->
+  </include>
+
+  <!-- kinova-driver Controller parameters-->
+  <rosparam file="$(find kinova_man_moveit_config)/config/ros_controllers.yaml"/>
+
+  <!-- Run Rviz and load the default config to see the state of the move_group node -->
+  <include file="$(find kinova_man_moveit_config)/launch/moveit_rviz.launch" if="$(arg gui)">
+    <arg name="config" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <!-- If database loading was enabled, start mongodb as well -->
+  <include file="$(find kinova_man_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
+    <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
+  </include>   
+
+</launch>

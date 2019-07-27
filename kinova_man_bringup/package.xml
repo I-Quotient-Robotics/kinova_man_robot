@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>kinova_man_bringup</name>
+  <version>1.1.0</version>
+  <description>The kinova_man_bringup package</description>
+
+  <maintainer email="yi.wang@iquotient-robotics.com">Yi Wang</maintainer>
+
+  <license>MIT</license>
+
+  <url type="website">https://github.com/I-Quotient-Robotics/kinova_man_robot</url>
+  <url type="repository">https://github.com/I-Quotient-Robotics/kinova_man_robot</url>
+  <url type="bugtracker">https://github.com/I-Quotient-Robotics/kinova_man_robot/issues</url>
+
+  <author email="yi.wang@iquotient-robotics.com">Yi Wang</author>
+  <author email="ye.tian@iquotient-robotics.com">Ye Tian</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+
+  <export>
+  </export>
+</package>

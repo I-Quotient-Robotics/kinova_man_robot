@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>kinova_man_moveit_config</name>
+  <version>1.1.0</version>
+  <description>
+     An automatically generated package with all the configuration and launch files for using the kinova_man_robot with the MoveIt! Motion Planning Framework
+  </description>
+
+  <maintainer email="yi.wang@iquotient-robotics.com">Yi Wang</maintainer>
+
+  <license>MIT</license>
+
+  <url type="website">https://github.com/I-Quotient-Robotics/kinova_man_robot</url>
+  <url type="repository">https://github.com/I-Quotient-Robotics/kinova_man_robot</url>
+  <url type="bugtracker">https://github.com/I-Quotient-Robotics/kinova_man_robot/issues</url>
+
+  <author email="yi.wang@iquotient-robotics.com">Yi Wang</author>
+  <author email="ye.tian@iquotient-robotics.com">Ye Tian</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <build_depend>kinova_man_description</build_depend>
+
+  <exec_depend>moveit_ros_move_group</exec_depend>
+  <exec_depend>moveit_fake_controller_manager</exec_depend>
+  <exec_depend>moveit_kinematics</exec_depend>
+  <exec_depend>moveit_planners_ompl</exec_depend>
+  <exec_depend>moveit_ros_visualization</exec_depend>
+  <exec_depend>moveit_setup_assistant</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>kinova_man_description</exec_depend>
+
+</package>

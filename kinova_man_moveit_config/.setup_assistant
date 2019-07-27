@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: kinova_man_description
+    relative_path: urdf/kinova_man_robot.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/kinova_man_robot.srdf
+  CONFIG:
+    author_name: Ye Tian
+    author_email: ye.tian@iquotient-robotics.com
+    generated_timestamp: 1564155164

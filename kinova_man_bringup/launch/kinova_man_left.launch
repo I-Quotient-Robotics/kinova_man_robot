@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find kinova_man_description)/urdf/kinova_man_robot.urdf.xacro" />
+
+  <node name="left_arm_driver" pkg="kinova_driver" type="kinova_arm_driver" output="screen" cwd="node" args="j2s7s300">
+    <rosparam file="$(find kinova_man_bringup)/config/robot_parameters.yaml" command="load" />
+    <param name="serial_number" value="PJ00900006510102-0" />
+    <param name="robot_name" value="left_arm" />   
+    <param name="robot_type" value="j2s7s300" />
+    <remap from="/left_arm_driver/out/joint_state" to="joint_states"/>
+  </node>
+
+  <node name="left_arm_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+  </node>
+</launch>
